@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Kumbh";
+  src: url("/src/assets/fonts/KumbhSans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/src/assets/fonts/RobotoSlab.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space";
+  src: url("/src/assets/fonts/SpaceMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-family-kumbh: "Kumbh", sans-serif;
+  --font-family-roboto: "Roboto", sans-serif;
+  --font-family-space: "Space", sans-serif;
+
+  /* Colors */
+  --color-c_b95: #14172e;
+  --color-c_b90: #161932;
+  --color-c_b85: #1e213f;
+  --color-c_b10: #d7e0ff;
+  --color-c_b5: #eff1fa;
+  --color-c_g4: #bbbdcb;
+  --color-c_g2: #bbbdcb;
+  --color-c_cyan: #70f3f8;
+  --color-c_red: #f87070;
+  --color-c_purple: #d881f8;
+
+  /* NON-MOBILE (nm) typography */
+  /* Kumbh */
+  --font-nm-kumbh-100: 100px;
+  --leading-nm-kumbh-100: 125%;
+  --tracking-nm-kumbh-100: -5px;
+  --weight-nm-kumbh-100: bold;
+
+  --font-nm-kumbh-16: 16px;
+  --leading-nm-kumbh-16: 125%;
+  --tracking-nm-kumbh-16: 15px;
+  --weight-nm-kumbh-16: bold;
+
+  --font-nm-kumbh-14: 14px;
+  --leading-nm-kumbh-14: 120%;
+  --tracking-nm-kumbh-14: 0px;
+  --weight-nm-kumbh-14: bold;
+
+  /* Roboto */
+  --font-nm-roboto-100: 100px;
+  --leading-nm-roboto-100: 130%;
+  --tracking-nm-roboto-100: 0px;
+  --weight-nm-roboto-100: bold;
+
+  --font-nm-roboto-16: 16px;
+  --leading-nm-roboto-16: 125%;
+  --tracking-nm-roboto-16: 15px;
+  --weight-nm-roboto-16: bold;
+
+  --font-nm-roboto-14: 14px;
+  --leading-nm-roboto-14: 130%;
+  --tracking-nm-roboto-14: 0px;
+  --weight-nm-roboto-14: bold;
+
+  /* Space */
+  --font-nm-space-100: 100px;
+  --leading-nm-space-100: 150%;
+  --tracking-nm-space-100: -10px;
+  --weight-nm-space-100: regular;
+
+  --font-nm-space-16: 16px;
+  --leading-nm-space-16: 150%;
+  --tracking-nm-space-16: 15px;
+  --weight-nm-space-16: bold;
+
+  --font-nm-space-13: 13px;
+  --leading-nm-space-13: 145%;
+  --tracking-nm-space-13: 0px;
+  --weight-nm-space-13: bold;
+
+  /* MOBILE (mb) typography */
+  /* Kumbh */
+  --font-mb-kumbh-80: 80px;
+  --leading-mb-kumbh-80: 125%;
+  --tracking-mb-kumbh-80: -5px;
+  --weight-mb-kumbh-80: bold;
+
+  --font-mb-kumbh-14: 14px;
+  --leading-mb-kumbh-14: 120%;
+  --tracking-mb-kumbh-14: 13px;
+  --weight-mb-kumbh-14: bold;
+
+  --font-mb-kumbh-12: 12px;
+  --leading-mb-kumbh-12: 125%;
+  --tracking-mb-kumbh-12: 0px;
+  --weight-mb-kumbh-12: bold;
+
+  /* Roboto */
+  --font-mb-roboto-80: 80px;
+  --leading-mb-roboto-80: 133%;
+  --tracking-mb-roboto-80: 0px;
+  --weight-mb-roboto-80: bold;
+
+  --font-mb-roboto-14: 14px;
+  --leading-mb-roboto-14: 130%;
+  --tracking-mb-roboto-14: 13px;
+  --weight-mb-roboto-14: bold;
+
+  --font-mb-roboto-12: 12px;
+  --leading-mb-roboto-12: 133%;
+  --tracking-mb-roboto-12: 0px;
+  --weight-mb-roboto-12: bold;
+
+  /* Space */
+  --font-mb-space-80: 80px;
+  --leading-mb-space-80: 120%;
+  --tracking-mb-space-80: -10px;
+  --weight-mb-space-80: regular;
+
+  --font-mb-space-14: 14px;
+  --leading-mb-space-14: 150%;
+  --tracking-mb-space-14: 13px;
+  --weight-mb-space-14: bold;
+
+  --font-mb-space-12: 12px;
+  --leading-mb-space-12: 150%;
+  --tracking-mb-space-12: 0px;
+  --weight-mb-space-12: bold;
+
+  /* SETTINGS DASHBOARD (set) typography */
+  /* Kumbh */
+  --font-set-kumbh-28: 28px;
+  --leading-set-kumbh-28: 125%;
+  --tracking-set-kumbh-28: 0px;
+  --weight-set-kumbh-28: bold;
+
+  --font-set-kumbh-13-a: 13px;
+  --leading-set-kumbh-13-a: 145%;
+  --tracking-set-kumbh-13-a: 0px;
+  --weight-set-kumbh-13-a: bold;
+
+  --font-set-kumbh-13-b: 13px;
+  --leading-set-kumbh-13-b: 125%;
+  --tracking-set-kumbh-13-b: 5px;
+  --weight-set-kumbh-13-b: bold;
+
+  --font-set-kumbh-12: 12px;
+  --leading-set-kumbh-12: 125%;
+  --tracking-set-kumbh-12: 0px;
+  --weight-set-kumbh-12: bold;
+
+  /* Kumbh */
+  --font-set-kumbh-16: 16px;
+  --leading-set-kumbh-16: 125%;
+  --tracking-set-kumbh-16: 0px;
+  --weight-set-kumbh-16: regular;
+
+  /* Roboto */
+  --font-set-roboto-16: 16px;
+  --leading-set-roboto-16: 125%;
+  --tracking-set-roboto-16: 0px;
+  --weight-set-roboto-16: regular;
+
+  /* Space */
+  --font-set-space-16: 16px;
+  --leading-set-space-16: 125%;
+  --tracking-set-space-16: 0px;
+  --weight-set-space-16: regular;
+}
+
+/* Display Utility classes */
+/* The size of the font is hardcoded  in CircularProgressbar*/
+.display-kumbh {
+  font-family: var(--font-family-kumbh);
+}
+.display-roboto {
+  font-family: var(--font-family-roboto);
+}
+.display-space {
+  font-family: var(--font-family-space);
+}
+
+/* NON-MOBILE Utility classes */
+.nm-kumbh-100 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-nm-kumbh-100);
+  line-height: var(--leading-nm-kumbh-100);
+  letter-spacing: var(--tracking-nm-kumbh-100);
+  font-weight: var(--weight-nm-kumbh-100);
+}
+
+.nm-kumbh-16 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-nm-kumbh-16);
+  line-height: var(--leading-nm-kumbh-16);
+  letter-spacing: var(--tracking-nm-kumbh-16);
+  font-weight: var(--weight-nm-kumbh-16);
+}
+
+.nm-kumbh-14 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-nm-kumbh-14);
+  line-height: var(--leading-nm-kumbh-14);
+  letter-spacing: var(--tracking-nm-kumbh-14);
+  font-weight: var(--weight-nm-kumbh-14);
+}
+
+.nm-roboto-100 {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-nm-roboto-100);
+  line-height: var(--leading-nm-roboto-100);
+  letter-spacing: var(--tracking-nm-roboto-100);
+  font-weight: var(--weight-nm-roboto-100);
+}
+
+.nm-roboto-16 {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-nm-roboto-16);
+  line-height: var(--leading-nm-roboto-16);
+  letter-spacing: var(--tracking-nm-roboto-16);
+  font-weight: var(--weight-nm-roboto-16);
+}
+
+.nm-roboto-14 {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-nm-roboto-14);
+  line-height: var(--leading-nm-roboto-14);
+  letter-spacing: var(--tracking-nm-roboto-14);
+  font-weight: var(--weight-nm-roboto-14);
+}
+
+.nm-space-100 {
+  font-family: var(--font-family-space);
+  font-size: var(--font-nm-space-100);
+  line-height: var(--leading-nm-space-100);
+  letter-spacing: var(--tracking-nm-space-100);
+  font-weight: var(--weight-nm-space-100);
+}
+
+.nm-space-16 {
+  font-family: var(--font-family-space);
+  font-size: var(--font-nm-space-16);
+  line-height: var(--leading-nm-space-16);
+  letter-spacing: var(--tracking-nm-space-16);
+  font-weight: var(--weight-nm-space-16);
+}
+
+/* Name forced to 14 to keep consistency with other font sizes */
+.nm-space-14 {
+  font-family: var(--font-family-space);
+  font-size: var(--font-nm-space-13);
+  line-height: var(--leading-nm-space-13);
+  letter-spacing: var(--tracking-nm-space-13);
+  font-weight: var(--weight-nm-space-13);
+}
+
+/* MOBILE Utility classes */
+.mb-kumbh-80 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-mb-kumbh-80);
+  line-height: var(--leading-mb-kumbh-80);
+  letter-spacing: var(--tracking-mb-kumbh-80);
+  font-weight: var(--weight-mb-kumbh-100);
+}
+
+.mb-kumbh-14 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-mb-kumbh-14);
+  line-height: var(--leading-mb-kumbh-14);
+  letter-spacing: var(--tracking-mb-kumbh-14);
+  font-weight: var(--weight-mb-kumbh-14);
+}
+
+.mb-kumbh-12 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-mb-kumbh-12);
+  line-height: var(--leading-mb-kumbh-12);
+  letter-spacing: var(--tracking-mb-kumbh-12);
+  font-weight: var(--weight-mb-kumbh-12);
+}
+
+.mb-roboto-80 {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-mb-roboto-80);
+  line-height: var(--leading-mb-roboto-80);
+  letter-spacing: var(--tracking-mb-roboto-80);
+  font-weight: var(--weight-mb-roboto-80);
+}
+
+.mb-roboto-14 {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-mb-roboto-14);
+  line-height: var(--leading-mb-roboto-14);
+  letter-spacing: var(--tracking-mb-roboto-14);
+  font-weight: var(--weight-mb-roboto-14);
+}
+
+.mb-roboto-12 {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-mb-roboto-12);
+  line-height: var(--leading-mb-roboto-12);
+  letter-spacing: var(--tracking-mb-roboto-12);
+  font-weight: var(--weight-mb-roboto-12);
+}
+
+.mb-space-80 {
+  font-family: var(--font-family-space);
+  font-size: var(--font-mb-space-80);
+  line-height: var(--leading-mb-space-80);
+  letter-spacing: var(--tracking-mb-space-80);
+  font-weight: var(--weight-mb-space-80);
+}
+
+.mb-space-14 {
+  font-family: var(--font-family-space);
+  font-size: var(--font-mb-space-14);
+  line-height: var(--leading-mb-space-14);
+  letter-spacing: var(--tracking-mb-space-14);
+  font-weight: var(--weight-mb-space-14);
+}
+
+.mb-space-12 {
+  font-family: var(--font-family-space);
+  font-size: var(--font-mb-space-12);
+  line-height: var(--leading-mb-space-12);
+  letter-spacing: var(--tracking-mb-space-12);
+  font-weight: var(--weight-mb-space-12);
+}
+
+/* SETTINGS DASHBOARD Utility classes */
+.set-kumbh-28 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-set-kumbh-28);
+  line-height: var(--leading-set-kumbh-28);
+  letter-spacing: var(--tracking-set-kumbh-28);
+  font-weight: var(--weight-set-kumbh-28);
+}
+
+.set-kumbh-13-a {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-set-kumbh-13-a);
+  line-height: var(--leading-set-kumbh-13-a);
+  letter-spacing: var(--tracking-set-kumbh-13-a);
+  font-weight: var(--weight-set-kumbh-13-a);
+}
+
+.set-kumbh-13-b {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-set-kumbh-13-b);
+  line-height: var(--leading-set-kumbh-13-b);
+  letter-spacing: var(--tracking-set-kumbh-13-b);
+  font-weight: var(--weight-set-kumbh-13-b);
+}
+
+.set-kumbh-12 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-set-kumbh-12);
+  line-height: var(--leading-set-kumbh-12);
+  letter-spacing: var(--tracking-set-kumbh-12);
+  font-weight: var(--weight-set-kumbh-12);
+}
+.set-kumbh-16 {
+  font-family: var(--font-family-kumbh);
+  font-size: var(--font-set-kumbh-16);
+  line-height: var(--leading-set-kumbh-16);
+  letter-spacing: var(--tracking-set-kumbh-16);
+  font-weight: var(--weight-set-kumbh-16);
+}
+.set-roboto-16 {
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-set-roboto-16);
+  line-height: var(--leading-set-roboto-16);
+  letter-spacing: var(--tracking-set-roboto-16);
+  font-weight: var(--weight-set-roboto-16);
+}
+
+.set-space-16 {
+  font-family: var(--font-family-space);
+  font-size: var(--font-set-space-16);
+  line-height: var(--leading-set-space-16);
+  letter-spacing: var(--tracking-set-space-16);
+  font-weight: var(--weight-set-space-16);
+}
