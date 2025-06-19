@@ -4,16 +4,19 @@ import { useState } from 'react'
 import { useTimerStore } from './store/useTimerStore'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+import { useWindowWidth } from '@react-hook/window-size'
+
 import './index.css'
+
 import Logo from "./assets/images/logo.svg?react"
 import Settings from "./assets/images/icon-settings.svg?react"
 import Close from "./assets/images/icon-close.svg?react"
 import Tick from "./assets/images/icon-tick.svg?react"
 
-import { useWindowWidth } from '@react-hook/window-size'
+import TimerSwitcher from './components/TimerSwitcher';
 
 import type { TimerId } from './store/useTimerStore'
-
+const TIMER_IDS: TimerId[] = ['A', 'B', 'C'] as const
 const TIMER_LABELS: Record<TimerId, string> = {
   A: "Pomodoro",
   B: "Long break",
@@ -43,6 +46,7 @@ const formatTime = (seconds: number) => {
 // ------------------------------------------------------Main App
 export default function App() {
 
+  // To controll clock font size as it is not via Tailwind
   let clockFontSize = 22
   const onlyWidth = useWindowWidth()
   if (onlyWidth >= 768) {
@@ -52,9 +56,6 @@ export default function App() {
   const [font, setFont] = useState<Font>('kumbh')
   const [color, setColor] = useState<ThemeColor>('var(--color-c_cyan)')
 
-  const textColor = "#ffffff"
-  const trailColor = "#161932"
-
   const [visibleTimer, setVisibleTimer] = useState<TimerId>('A')
   const timers = useTimerStore(state => state.timers)
   const start = useTimerStore(state => state.start)
@@ -62,12 +63,13 @@ export default function App() {
   const reset = useTimerStore(state => state.reset)
   const updateDuration = useTimerStore(state => state.updateDuration)
 
-  const [modalOpen, setModalOpen] = useState(false)
   const [formValues, setFormValues] = useState<Record<TimerId, string>>({
     A: (timers.A.duration / 60).toString(),
     B: (timers.B.duration / 60).toString(),
     C: (timers.C.duration / 60).toString(),
   })
+
+  const [modalOpen, setModalOpen] = useState(false)
 
   const handleOpenModal = () => {
     setFormValues({
@@ -77,9 +79,16 @@ export default function App() {
     })
     setModalOpen(true)
   }
-  const handleSaveDurations = () => {
 
-    (['A', 'B', 'C'] as TimerId[]).forEach(id => {
+  /**
+   * Handle the save button click of the modal dialog.
+   * This function loops through each timer and if the new minutes is different
+   * from the current minutes, it will call updateDuration to update the timer's
+   * duration.
+   * After updating the durations, the modal dialog will be closed.
+   */
+  const handleSaveDurations = () => {
+    TIMER_IDS.forEach(id => {
       const newMinutes = parseInt(formValues[id], 10);
       const currentMinutes = timers[id].duration / 60;
       if (!isNaN(newMinutes) && newMinutes !== currentMinutes) {
@@ -90,15 +99,16 @@ export default function App() {
     setModalOpen(false);
   };
 
+  // Controlls the circular progress bar
   const timer = timers[visibleTimer]
   const progress =
     timer.remainingTime > 0
       ? ((timer.duration - timer.remainingTime) / timer.duration) * 100
       : 100
 
+  // Controlls the label and the action of the button
   let buttonLabel: string
   let buttonAction: () => void
-
   if (timer.remainingTime === 0) {
     buttonLabel = 'Restart'
     buttonAction = () => reset(visibleTimer)
@@ -118,31 +128,25 @@ export default function App() {
       <Logo className='mb-10 scale-75 md:scale-100' />
 
       {/* Switch Timer Buttons */}
-      <div className="flex space-x-4 bg-c_b90 p-5 rounded-[46px]">
-        {(['A', 'B', 'C'] as const).map(id => (
-          <button
-            key={id}
-            onClick={() => setVisibleTimer(id)}
-            style={visibleTimer === id ? { backgroundColor: color, color: '#1E213F' } : {}}
-            className={`rounded-4xl px-5 py-4 font-bold nm-${font}-14 rounded ${visibleTimer !== id ? 'text-[#636984]' : ''}`}
-          >
-            {TIMER_LABELS[id]}
-          </button>
-        ))}
-      </div>
+      <TimerSwitcher
+        visibleTimer={visibleTimer}
+        setVisibleTimer={setVisibleTimer}
+        color={color}
+        font={font}
+      />
 
       {/* Circular Timer Display */}
       <div className='flex justify-center items-center rounded-full shadow-[#2E325A] shadow-[-44px_-42px_59px_-20px_rgba(0,_0,_0,_0.2)]'>
         <div className='flex p-6 justify-center items-center rounded-full bg-linear-to-br from-[#0E112A] to-[#2E325A] shadow-[#0e112a] shadow-[49px_50px_59px_-20px_rgba(0,_0,_0,_0.2)] '>
-          <div className='w-[227px] md:w-[360px] rounded-full bg-[#161932] '>
+          <div className='w-[227px] md:w-[360px] rounded-full bg-[#161932]  p-4'>
             <div className={`w-full h-full display-${font} relative flex hover:animate-pulse flex-com justify-center items-center`}>
               <CircularProgressbar
                 value={progress}
                 text={formatTime(timer.remainingTime)}
                 styles={buildStyles({
-                  textColor: textColor,
+                  textColor: "#ffffff",
                   pathColor: color,
-                  trailColor: trailColor,
+                  trailColor: "#161932",
                   textSize: `${clockFontSize}px`,
                 })}
                 strokeWidth={5}
@@ -185,7 +189,7 @@ export default function App() {
             <p className='set-kumbh-13-a'>T I M E  (M I N U T E S)</p>
 
             <div className="grid grid-cols-3 gap-4 border-b-2 border-slate-200 pb-8">
-              {(['A', 'B', 'C'] as TimerId[]).map(id => (
+              {TIMER_IDS.map(id => (
                 <div key={id} className="flex flex-col">
                   <label className="set-kumbh-12">{TIMER_LABELS[id]}</label>
                   <input
